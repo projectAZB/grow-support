@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: backend
+    volumes:
+      - ./backend:/app/backend
+    env_file: .env
+    command: ./scripts/start.sh
+    ports:
+      - 5000:5000
+    depends_on:
+      - database
+      - rabbit
+
+  worker:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: backend
+    volumes:
+      - ./backend:/app/backend
+    env_file: .env
+    command: ./scripts/worker.sh
+    depends_on:
+      - database
+      - rabbit
+
+  database:
+    image: mariadb:10.5
+    volumes:
+      - ./mysql-data/:/var/lib/mysql/
+    env_file: .env
+    ports:
+      - 3306:3306
+
+  rabbit:
+    image: rabbitmq:3.8
+    env_file: .env
+    ports:
+      - 5672:5672
+      - 15672:15672  # rabbitmq management plugin and rabbitmq api
+
+  redis:
+    image: redis:6.0.9-buster
+    hostname: redis
+    env_file: .env
+    ports:
+      - 6379:6379
