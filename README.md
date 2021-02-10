@@ -15,7 +15,7 @@
 
 ## Run Locally
 
-1. Clone the repo, `cd` to the root, and run docker-compose up
+1. Clone the repo, `cd` to the root, and run `docker-compose up`
 2. In another terminal, ssh into backend and run the following scripts:
     - `./scripts/db-create.sh` (creates the 'grow' database)
     - `./scripts/db-migrate.sh` (runs migrations/creates tables)
