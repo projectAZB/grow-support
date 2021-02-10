@@ -4,5 +4,5 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class Base:
+class Entity:
     id: Optional[int]

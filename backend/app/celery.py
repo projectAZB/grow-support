@@ -1,14 +1,14 @@
 from celery import Celery
 from flask import Flask
 
-from backend.settings import env_vars
+from backend.settings.env_vars import RABBIT_URL, REDIS_URL
 
-celery = Celery(__name__, broker=env_vars.env_rabbit_url(), backend=env_vars.env_redis_url())
+celery = Celery(__name__, broker=RABBIT_URL, backend=REDIS_URL)
 
 
 def init_celery(app: Flask, _celery: Celery):
     _celery.conf.update(app.config)
-    _celery.autodiscover_tasks(['backend.app.user'])
+    _celery.autodiscover_tasks(['backend.app.messages'])
     TaskBase = _celery.Task
 
     class ContextTask(TaskBase):

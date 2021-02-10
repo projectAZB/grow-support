@@ -1,0 +1,35 @@
+{% extends 'layout.jinja2' %}
+
+{% block styles %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}" type="text/css"/>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="form-wrapper">
+      <h1 class="title"> Respond to {{ message.from_ }}</h1>
+      <h3  class="title">Received Text: {{ message.body }}</h3>
+
+      <form method="POST" action="{{ url_for('message_api.respond', message_id=message.id) }}">
+          {{ form.csrf_token }}
+
+          <fieldset class="form-field">{{ form.body.label }} {{ form.body }}
+            {% if form.body.errors %}
+              <ul class="errors">
+                {% for error in form.body.errors %}
+                  <li class="error">
+                      <i class="fas fa-exclamation"></i> <span class="error-message">{{ error }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </fieldset>
+
+          {{ form.submit }}
+
+      </form>
+    </div>
+
+{% endblock %}

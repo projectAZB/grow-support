@@ -3,7 +3,7 @@
 # access-logfile: `-` signifies stdout
 # error-logfile: `-` signifies stderr
 
-gunicorn -w 1 --bind :5000 \
+gunicorn -w 1 --bind :80 \
     --reload \
     --access-logformat \
     '{"logger":"gunicorn","host":"%(h)s","code":"%(s)s","method":"%(m)s","path":"%(U)s","query":"%(q)s","size":"%(B)s"}' \

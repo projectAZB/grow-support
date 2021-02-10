@@ -9,7 +9,7 @@
 {% block content %}
 
     <div class="form-wrapper">
-      <h2 class="title">Admin Login</h2>
+      <h2 class="title">{{ title }}</h2>
 
       <form method="POST" action="{{ url_for('user_api.login') }}">
           {{ form.csrf_token }}

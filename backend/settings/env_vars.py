@@ -2,7 +2,7 @@ import os
 
 # Extract env variables here
 
-APP_NAME = os.getenv('APP_NAME', 'backend')
+APP_NAME = os.getenv('APP_NAME', 'Grow')
 
 
 def get_env_variable_bool(var_name, default=None):
@@ -51,8 +51,6 @@ SQLALCHEMY_TRACK_MODIFICATIONS = get_env_variable_bool('SQLALCHEMY_TRACK_MODIFIC
 
 DEBUG = get_env_variable_bool('DEBUG', 'False')
 
-APP_ROOT_URL = os.getenv(f'APP_ROOT_URL', 'http://0.0.0.0:5000')
-
 FLASK_APP = '/backend/app/factory.py'
 FLASK_SKIP_DOTENV = 1
 PYTHONUNBUFFERED = 1
@@ -61,5 +59,10 @@ SECRET_KEY = 'secret_key'
 
 FLASK_ADMIN_SWATCH = 'paper'
 
-redis = env_redis_url()
-rabbit = env_rabbit_url()
+REDIS_URL = env_redis_url()
+RABBIT_URL = env_rabbit_url()
+
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_API_SID', 'xxx')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_API_TOKEN', 'xxx')
+TWILIO_MESSAGING_SERVICE_SID = os.getenv('TWILIO_MESSAGING_SERVICE_SID', 'xxx')
+TWILIO_NUMBER = os.getenv('TWILIO_NUMBER', '+17172290088')
